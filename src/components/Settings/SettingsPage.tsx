@@ -26,6 +26,8 @@ import {
 import { useAuth } from '../../contexts/AuthContext';
 import { Header } from '../Layout/Header';
 import { AdvancedSettings } from './AdvancedSettings';
+import { ThemeSelector } from './ThemeSelector';
+import { APISettings } from './APISettings';
 
 export function SettingsPage() {
   const { user } = useAuth();
@@ -35,9 +37,10 @@ export function SettingsPage() {
 
   const tabs = [
     { id: 'profile', label: 'Profile', icon: User, roles: ['end_user', 'admin', 'super_admin', 'moderator', 'trainer'] },
+    { id: 'appearance', label: 'Appearance', icon: Palette, roles: ['end_user', 'admin', 'super_admin', 'moderator', 'trainer'] },
     { id: 'notifications', label: 'Notifications', icon: Bell, roles: ['end_user', 'admin', 'super_admin', 'moderator', 'trainer'] },
-    { id: 'appearance', label: 'Appearance', icon: Palette, roles: ['end_user', 'admin', 'super_admin'] },
     { id: 'privacy', label: 'Privacy & Security', icon: Shield, roles: ['end_user', 'admin', 'super_admin', 'moderator', 'trainer'] },
+    { id: 'api', label: 'API Settings', icon: Key, roles: ['admin', 'super_admin'] },
     { id: 'data', label: 'Data & Export', icon: Download, roles: ['end_user', 'admin', 'super_admin'] },
     { id: 'advanced', label: 'Advanced', icon: Settings, roles: ['admin', 'super_admin'] },
     { id: 'system', label: 'System', icon: Database, roles: ['super_admin'] }
@@ -58,38 +61,38 @@ export function SettingsPage() {
               </div>
               <div>
                 <button className="btn-secondary text-sm">Change Avatar</button>
-                <p className="text-xs text-slate-500 mt-1">JPG, PNG up to 2MB</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">JPG, PNG up to 2MB</p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Full Name</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Full Name</label>
                 <input
                   type="text"
                   defaultValue={user?.name}
-                  className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300"
+                  className="w-full px-4 py-3 bg-white/50 dark:bg-slate-700/50 border border-white/30 dark:border-slate-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Email</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Email</label>
                 <input
                   type="email"
                   defaultValue={user?.email}
-                  className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300"
+                  className="w-full px-4 py-3 bg-white/50 dark:bg-slate-700/50 border border-white/30 dark:border-slate-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Phone Number</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Phone Number</label>
                 <input
                   type="tel"
                   placeholder="+1 (555) 123-4567"
-                  className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300"
+                  className="w-full px-4 py-3 bg-white/50 dark:bg-slate-700/50 border border-white/30 dark:border-slate-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300 dark:text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Timezone</label>
-                <select className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Timezone</label>
+                <select className="w-full px-4 py-3 bg-white/50 dark:bg-slate-700/50 border border-white/30 dark:border-slate-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300 dark:text-white">
                   <option>UTC-8 (Pacific Time)</option>
                   <option>UTC-5 (Eastern Time)</option>
                   <option>UTC+0 (GMT)</option>
@@ -99,10 +102,10 @@ export function SettingsPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Bio</label>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Bio</label>
               <textarea
                 placeholder="Tell us a bit about yourself..."
-                className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300 min-h-24 resize-none"
+                className="w-full px-4 py-3 bg-white/50 dark:bg-slate-700/50 border border-white/30 dark:border-slate-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300 min-h-24 resize-none dark:text-white"
                 rows={3}
               />
             </div>
@@ -115,6 +118,9 @@ export function SettingsPage() {
             </div>
           </div>
         );
+
+      case 'appearance':
+        return <ThemeSelector />;
 
       case 'notifications':
         return (
@@ -152,14 +158,14 @@ export function SettingsPage() {
                   enabled: false
                 }
               ].map((notification, index) => (
-                <div key={index} className="flex items-center justify-between p-4 bg-white/50 rounded-xl">
+                <div key={index} className="flex items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-xl">
                   <div>
-                    <h4 className="font-medium text-slate-700">{notification.title}</h4>
-                    <p className="text-sm text-slate-500">{notification.description}</p>
+                    <h4 className="font-medium text-slate-700 dark:text-slate-300">{notification.title}</h4>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">{notification.description}</p>
                   </div>
                   <button
                     className={`w-12 h-6 rounded-full transition-all ${
-                      notification.enabled ? 'bg-purple-500' : 'bg-slate-300'
+                      notification.enabled ? 'bg-purple-500' : 'bg-slate-300 dark:bg-slate-600'
                     }`}
                   >
                     <div className={`w-5 h-5 bg-white rounded-full transition-all ${
@@ -170,112 +176,24 @@ export function SettingsPage() {
               ))}
             </div>
 
-            <div className="p-4 bg-blue-50 rounded-xl border border-blue-200">
-              <h4 className="font-medium text-blue-800 mb-2">Notification Schedule</h4>
+            <div className="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl border border-blue-200 dark:border-blue-700">
+              <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-2">Notification Schedule</h4>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-blue-700 mb-1">Start Time</label>
+                  <label className="block text-sm font-medium text-blue-700 dark:text-blue-300 mb-1">Start Time</label>
                   <input
                     type="time"
                     defaultValue="09:00"
-                    className="w-full px-3 py-2 bg-white border border-blue-200 rounded-lg text-sm"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-700 border border-blue-200 dark:border-blue-600 rounded-lg text-sm dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-blue-700 mb-1">End Time</label>
+                  <label className="block text-sm font-medium text-blue-700 dark:text-blue-300 mb-1">End Time</label>
                   <input
                     type="time"
                     defaultValue="21:00"
-                    className="w-full px-3 py-2 bg-white border border-blue-200 rounded-lg text-sm"
+                    className="w-full px-3 py-2 bg-white dark:bg-slate-700 border border-blue-200 dark:border-blue-600 rounded-lg text-sm dark:text-white"
                   />
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-
-      case 'appearance':
-        return (
-          <div className="space-y-6">
-            <div>
-              <h4 className="font-medium text-slate-700 mb-4">Theme</h4>
-              <div className="grid grid-cols-3 gap-3">
-                {[
-                  { key: 'light', label: 'Light', icon: Sun },
-                  { key: 'dark', label: 'Dark', icon: Moon },
-                  { key: 'auto', label: 'Auto', icon: Palette }
-                ].map(({ key, label, icon: Icon }) => (
-                  <button
-                    key={key}
-                    className={`flex flex-col items-center space-y-2 p-4 rounded-xl border-2 transition-all ${
-                      user?.preferences.theme === key
-                        ? 'border-purple-300 bg-purple-50'
-                        : 'border-white/30 bg-white/50 hover:border-purple-200'
-                    }`}
-                  >
-                    <Icon className="w-6 h-6" />
-                    <span className="font-medium">{label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-medium text-slate-700 mb-4">Chat Appearance</h4>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Message Bubble Style</label>
-                  <div className="grid grid-cols-3 gap-3">
-                    {['rounded', 'square', 'minimal'].map((style) => (
-                      <button
-                        key={style}
-                        className={`p-3 rounded-xl border-2 transition-all capitalize ${
-                          user?.preferences.appearance.bubbleStyle === style
-                            ? 'border-purple-300 bg-purple-50'
-                            : 'border-white/30 bg-white/50 hover:border-purple-200'
-                        }`}
-                      >
-                        {style}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Font Size</label>
-                  <div className="grid grid-cols-3 gap-3">
-                    {['small', 'medium', 'large'].map((size) => (
-                      <button
-                        key={size}
-                        className={`p-3 rounded-xl border-2 transition-all capitalize ${
-                          user?.preferences.fontSize === size
-                            ? 'border-purple-300 bg-purple-50'
-                            : 'border-white/30 bg-white/50 hover:border-purple-200'
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Accent Color</label>
-                  <div className="flex space-x-3">
-                    {[
-                      '#a855f7', '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'
-                    ].map((color) => (
-                      <button
-                        key={color}
-                        className={`w-10 h-10 rounded-full border-4 transition-all ${
-                          user?.preferences.appearance.accentColor === color
-                            ? 'border-slate-300 scale-110'
-                            : 'border-white hover:scale-105'
-                        }`}
-                        style={{ backgroundColor: color }}
-                      />
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>
@@ -286,28 +204,28 @@ export function SettingsPage() {
         return (
           <div className="space-y-6">
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-white/50 rounded-xl">
+              <div className="flex items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-xl">
                 <div>
-                  <h4 className="font-medium text-slate-700">Two-Factor Authentication</h4>
-                  <p className="text-sm text-slate-500">Add an extra layer of security</p>
+                  <h4 className="font-medium text-slate-700 dark:text-slate-300">Two-Factor Authentication</h4>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">Add an extra layer of security</p>
                 </div>
                 <button className="btn-secondary text-sm">Enable 2FA</button>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-white/50 rounded-xl">
+              <div className="flex items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-xl">
                 <div>
-                  <h4 className="font-medium text-slate-700">Login Notifications</h4>
-                  <p className="text-sm text-slate-500">Get notified of new logins</p>
+                  <h4 className="font-medium text-slate-700 dark:text-slate-300">Login Notifications</h4>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">Get notified of new logins</p>
                 </div>
                 <button className="w-12 h-6 bg-purple-500 rounded-full">
                   <div className="w-5 h-5 bg-white rounded-full translate-x-6" />
                 </button>
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-white/50 rounded-xl">
+              <div className="flex items-center justify-between p-4 bg-white/50 dark:bg-slate-700/50 rounded-xl">
                 <div>
-                  <h4 className="font-medium text-slate-700">Data Analytics</h4>
-                  <p className="text-sm text-slate-500">Help improve our service with usage data</p>
+                  <h4 className="font-medium text-slate-700 dark:text-slate-300">Data Analytics</h4>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">Help improve our service with usage data</p>
                 </div>
                 <button className="w-12 h-6 bg-purple-500 rounded-full">
                   <div className="w-5 h-5 bg-white rounded-full translate-x-6" />
@@ -316,35 +234,35 @@ export function SettingsPage() {
             </div>
 
             <div>
-              <h4 className="font-medium text-slate-700 mb-4">Change Password</h4>
+              <h4 className="font-medium text-slate-700 dark:text-slate-300 mb-4">Change Password</h4>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Current Password</label>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Current Password</label>
                   <div className="relative">
                     <input
                       type={showPassword ? 'text' : 'password'}
-                      className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300 pr-12"
+                      className="w-full px-4 py-3 bg-white/50 dark:bg-slate-700/50 border border-white/30 dark:border-slate-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300 pr-12 dark:text-white"
                     />
                     <button
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
                     >
                       {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                     </button>
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">New Password</label>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">New Password</label>
                   <input
                     type="password"
-                    className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300"
+                    className="w-full px-4 py-3 bg-white/50 dark:bg-slate-700/50 border border-white/30 dark:border-slate-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300 dark:text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Confirm New Password</label>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Confirm New Password</label>
                   <input
                     type="password"
-                    className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300"
+                    className="w-full px-4 py-3 bg-white/50 dark:bg-slate-700/50 border border-white/30 dark:border-slate-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-300 dark:text-white"
                   />
                 </div>
                 <button className="btn-primary">Update Password</button>
@@ -353,53 +271,56 @@ export function SettingsPage() {
           </div>
         );
 
+      case 'api':
+        return <APISettings />;
+
       case 'data':
         return (
           <div className="space-y-6">
             <div className="space-y-4">
-              <div className="p-4 bg-white/50 rounded-xl">
+              <div className="p-4 bg-white/50 dark:bg-slate-700/50 rounded-xl">
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-medium text-slate-700">Export Chat History</h4>
+                  <h4 className="font-medium text-slate-700 dark:text-slate-300">Export Chat History</h4>
                   <button className="btn-secondary text-sm flex items-center space-x-2">
                     <Download className="w-4 h-4" />
                     <span>Export</span>
                   </button>
                 </div>
-                <p className="text-sm text-slate-500">Download all your conversations as JSON or PDF</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Download all your conversations as JSON or PDF</p>
               </div>
 
-              <div className="p-4 bg-white/50 rounded-xl">
+              <div className="p-4 bg-white/50 dark:bg-slate-700/50 rounded-xl">
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-medium text-slate-700">Export User Data</h4>
+                  <h4 className="font-medium text-slate-700 dark:text-slate-300">Export User Data</h4>
                   <button className="btn-secondary text-sm flex items-center space-x-2">
                     <Download className="w-4 h-4" />
                     <span>Export</span>
                   </button>
                 </div>
-                <p className="text-sm text-slate-500">Download all your account data and settings</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Download all your account data and settings</p>
               </div>
 
-              <div className="p-4 bg-white/50 rounded-xl">
+              <div className="p-4 bg-white/50 dark:bg-slate-700/50 rounded-xl">
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-medium text-slate-700">Clear Chat History</h4>
-                  <button className="btn-secondary text-sm text-amber-600 border-amber-200 hover:bg-amber-50">
+                  <h4 className="font-medium text-slate-700 dark:text-slate-300">Clear Chat History</h4>
+                  <button className="btn-secondary text-sm text-amber-600 border-amber-200 hover:bg-amber-50 dark:border-amber-700 dark:hover:bg-amber-900/30">
                     Clear All
                   </button>
                 </div>
-                <p className="text-sm text-slate-500">Permanently delete all your conversations</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Permanently delete all your conversations</p>
               </div>
             </div>
 
-            <div className="p-6 bg-red-50 rounded-xl border border-red-200">
-              <h4 className="font-medium text-red-800 mb-4 flex items-center">
+            <div className="p-6 bg-red-50 dark:bg-red-900/30 rounded-xl border border-red-200 dark:border-red-700">
+              <h4 className="font-medium text-red-800 dark:text-red-300 mb-4 flex items-center">
                 <AlertTriangle className="w-5 h-5 mr-2" />
                 Danger Zone
               </h4>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h5 className="font-medium text-red-700">Delete Account</h5>
-                    <p className="text-sm text-red-600">Permanently delete your account and all data</p>
+                    <h5 className="font-medium text-red-700 dark:text-red-300">Delete Account</h5>
+                    <p className="text-sm text-red-600 dark:text-red-400">Permanently delete your account and all data</p>
                   </div>
                   <button
                     onClick={() => setShowDeleteConfirm(true)}
@@ -420,31 +341,31 @@ export function SettingsPage() {
         return (
           <div className="space-y-6">
             <div className="card">
-              <h3 className="text-lg font-semibold text-slate-800 mb-6 flex items-center">
+              <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-6 flex items-center">
                 <Database className="w-5 h-5 mr-2 text-purple-500" />
                 System Health
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                  <h4 className="font-medium text-green-800">Database</h4>
-                  <p className="text-2xl font-bold text-green-600">99.9%</p>
-                  <p className="text-sm text-green-600">Uptime</p>
+                <div className="p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-700">
+                  <h4 className="font-medium text-green-800 dark:text-green-300">Database</h4>
+                  <p className="text-2xl font-bold text-green-600 dark:text-green-400">99.9%</p>
+                  <p className="text-sm text-green-600 dark:text-green-400">Uptime</p>
                 </div>
-                <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                  <h4 className="font-medium text-blue-800">API Response</h4>
-                  <p className="text-2xl font-bold text-blue-600">145ms</p>
-                  <p className="text-sm text-blue-600">Average</p>
+                <div className="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700">
+                  <h4 className="font-medium text-blue-800 dark:text-blue-300">API Response</h4>
+                  <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">145ms</p>
+                  <p className="text-sm text-blue-600 dark:text-blue-400">Average</p>
                 </div>
-                <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
-                  <h4 className="font-medium text-purple-800">Active Users</h4>
-                  <p className="text-2xl font-bold text-purple-600">12,543</p>
-                  <p className="text-sm text-purple-600">Online now</p>
+                <div className="p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-700">
+                  <h4 className="font-medium text-purple-800 dark:text-purple-300">Active Users</h4>
+                  <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">12,543</p>
+                  <p className="text-sm text-purple-600 dark:text-purple-400">Online now</p>
                 </div>
               </div>
             </div>
 
             <div className="card">
-              <h3 className="text-lg font-semibold text-slate-800 mb-6 flex items-center">
+              <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-6 flex items-center">
                 <Zap className="w-5 h-5 mr-2 text-purple-500" />
                 System Actions
               </h3>
@@ -493,8 +414,8 @@ export function SettingsPage() {
                       onClick={() => setActiveTab(tab.id)}
                       className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all ${
                         activeTab === tab.id
-                          ? 'bg-gradient-to-r from-purple-500/20 to-teal-500/20 text-purple-700 border border-purple-200'
-                          : 'text-slate-600 hover:bg-white/50 hover:text-purple-600'
+                          ? 'bg-gradient-to-r from-purple-500/20 to-teal-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-700'
+                          : 'text-slate-600 dark:text-slate-300 hover:bg-white/50 dark:hover:bg-slate-700/50 hover:text-purple-600 dark:hover:text-purple-400'
                       }`}
                     >
                       <Icon className="w-5 h-5" />
@@ -526,14 +447,14 @@ export function SettingsPage() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-2xl p-6 max-w-md w-full"
+            className="bg-white dark:bg-slate-800 rounded-2xl p-6 max-w-md w-full"
           >
             <div className="text-center">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <AlertTriangle className="w-8 h-8 text-red-600" />
+              <div className="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                <AlertTriangle className="w-8 h-8 text-red-600 dark:text-red-400" />
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-2">Delete Account</h3>
-              <p className="text-slate-600 mb-6">
+              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">Delete Account</h3>
+              <p className="text-slate-600 dark:text-slate-300 mb-6">
                 This action cannot be undone. All your data, conversations, and settings will be permanently deleted.
               </p>
               <div className="flex space-x-3">

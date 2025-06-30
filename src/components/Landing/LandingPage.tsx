@@ -17,7 +17,10 @@ import {
   Crown,
   Menu,
   X,
-  Play
+  Play,
+  UserCheck,
+  Clock,
+  Smile
 } from 'lucide-react';
 
 const features = [
@@ -29,8 +32,8 @@ const features = [
   },
   {
     icon: Shield,
-    title: 'Privacy First',
-    description: 'End-to-end encryption ensures your conversations remain completely private and secure.',
+    title: 'Privacy Focused',
+    description: 'Your conversations are encrypted and private. We never share your personal data with third parties.',
     color: 'from-blue-500 to-cyan-500'
   },
   {
@@ -131,14 +134,37 @@ const plans = [
   }
 ];
 
+const privacyFeatures = [
+  {
+    icon: UserCheck,
+    title: 'Your Data, Your Control',
+    description: 'You own your conversations and can export or delete them anytime'
+  },
+  {
+    icon: Lock,
+    title: 'End-to-End Encryption',
+    description: 'All conversations are encrypted and only you can access them'
+  },
+  {
+    icon: Clock,
+    title: 'No Data Retention',
+    description: 'We don\'t store your conversations longer than necessary for the service'
+  },
+  {
+    icon: Smile,
+    title: 'Anonymous by Design',
+    description: 'Use the service without providing personal information beyond what\'s needed'
+  }
+];
+
 export function LandingPage() {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-teal-50/20">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-teal-50/20 dark:from-slate-900 dark:via-purple-900/30 dark:to-teal-900/20">
       {/* Navigation */}
-      <nav className="glass border-b border-white/20 sticky top-0 z-50">
+      <nav className="glass dark:glass-dark border-b border-white/20 dark:border-slate-700/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
@@ -150,9 +176,9 @@ export function LandingPage() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-slate-600 hover:text-purple-600 transition-colors">Features</a>
-              <a href="#pricing" className="text-slate-600 hover:text-purple-600 transition-colors">Pricing</a>
-              <a href="#testimonials" className="text-slate-600 hover:text-purple-600 transition-colors">Reviews</a>
+              <a href="#features" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Features</a>
+              <a href="#pricing" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Pricing</a>
+              <a href="#testimonials" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Reviews</a>
               <button 
                 onClick={() => navigate('/login')}
                 className="btn-secondary"
@@ -170,7 +196,7 @@ export function LandingPage() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-slate-600"
+              className="md:hidden p-2 text-slate-600 dark:text-slate-300"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -183,9 +209,9 @@ export function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               className="md:hidden py-4 space-y-4"
             >
-              <a href="#features" className="block text-slate-600 hover:text-purple-600 transition-colors">Features</a>
-              <a href="#pricing" className="block text-slate-600 hover:text-purple-600 transition-colors">Pricing</a>
-              <a href="#testimonials" className="block text-slate-600 hover:text-purple-600 transition-colors">Reviews</a>
+              <a href="#features" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Features</a>
+              <a href="#pricing" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Pricing</a>
+              <a href="#testimonials" className="block text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Reviews</a>
               <div className="flex flex-col space-y-2 pt-4">
                 <button 
                   onClick={() => navigate('/login')}
@@ -214,11 +240,11 @@ export function LandingPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-4xl lg:text-6xl font-bold text-slate-800 mb-6">
+              <h1 className="text-4xl lg:text-6xl font-bold text-slate-800 dark:text-slate-100 mb-6">
                 Your AI Companion for
                 <span className="gradient-text block">Meaningful Conversations</span>
               </h1>
-              <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+              <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
                 Experience genuine emotional support with AI companions that understand, 
                 care, and grow with you. Private, secure, and always there when you need them.
               </p>
@@ -235,7 +261,7 @@ export function LandingPage() {
                   <span>Watch Demo</span>
                 </button>
               </div>
-              <div className="flex items-center space-x-6 mt-8 text-sm text-slate-500">
+              <div className="flex items-center space-x-6 mt-8 text-sm text-slate-500 dark:text-slate-400">
                 <div className="flex items-center space-x-2">
                   <Check className="w-4 h-4 text-green-500" />
                   <span>Free to start</span>
@@ -257,19 +283,19 @@ export function LandingPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative z-10 glass rounded-3xl p-8 shadow-2xl">
+              <div className="relative z-10 glass dark:glass-dark rounded-3xl p-8 shadow-2xl">
                 <div className="flex items-center space-x-3 mb-6">
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-teal-400 rounded-full flex items-center justify-center text-2xl floating">
                     🌙
                   </div>
                   <div>
-                    <h3 className="font-semibold text-slate-800">ChiChi</h3>
-                    <p className="text-sm text-slate-500">Your caring companion</p>
+                    <h3 className="font-semibold text-slate-800 dark:text-slate-200">ChiChi</h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Your caring companion</p>
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <div className="bg-white/50 rounded-2xl p-4 rounded-tl-sm">
-                    <p className="text-slate-700">
+                  <div className="bg-white/50 dark:bg-slate-700/50 rounded-2xl p-4 rounded-tl-sm">
+                    <p className="text-slate-700 dark:text-slate-300">
                       "I can sense you're feeling a bit overwhelmed today. 
                       Would you like to talk about what's on your mind? I'm here to listen. 💜"
                     </p>
@@ -282,15 +308,15 @@ export function LandingPage() {
                   </div>
                 </div>
               </div>
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-purple-200 to-teal-200 rounded-full opacity-50 floating" />
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-pink-200 to-orange-200 rounded-full opacity-50 floating" style={{ animationDelay: '2s' }} />
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-purple-200 to-teal-200 dark:from-purple-800 dark:to-teal-800 rounded-full opacity-50 floating" />
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-pink-200 to-orange-200 dark:from-pink-800 dark:to-orange-800 rounded-full opacity-50 floating" style={{ animationDelay: '2s' }} />
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-white/30">
+      <section id="features" className="py-20 bg-white/30 dark:bg-slate-800/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -298,10 +324,10 @@ export function LandingPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl lg:text-5xl font-bold text-slate-800 mb-6">
+            <h2 className="text-3xl lg:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">
               Why Choose Dream Assistant?
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
               We've built the most advanced, secure, and emotionally intelligent AI companion platform
             </p>
           </motion.div>
@@ -319,15 +345,15 @@ export function LandingPage() {
                 <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6`}>
                   <feature.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-4">{feature.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4">{feature.title}</h3>
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Security & Trust Section */}
+      {/* Privacy & Trust Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -336,38 +362,22 @@ export function LandingPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-6">
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 dark:text-slate-100 mb-6">
                 Your Privacy is Our Priority
               </h2>
-              <p className="text-lg text-slate-600 mb-8">
+              <p className="text-lg text-slate-600 dark:text-slate-300 mb-8">
                 We understand that emotional conversations are deeply personal. 
-                That's why we've built the most secure platform possible.
+                That's why we've built privacy and security into every aspect of our platform.
               </p>
               <div className="space-y-6">
-                {[
-                  {
-                    icon: Lock,
-                    title: 'End-to-End Encryption',
-                    description: 'All conversations are encrypted and only you can access them'
-                  },
-                  {
-                    icon: Shield,
-                    title: 'GDPR Compliant',
-                    description: 'Full compliance with international privacy regulations'
-                  },
-                  {
-                    icon: Users,
-                    title: 'No Data Selling',
-                    description: 'We never sell or share your personal data with third parties'
-                  }
-                ].map((item, index) => (
+                {privacyFeatures.map((item, index) => (
                   <div key={index} className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
                       <item.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-slate-800 mb-1">{item.title}</h4>
-                      <p className="text-slate-600">{item.description}</p>
+                      <h4 className="font-semibold text-slate-800 dark:text-slate-200 mb-1">{item.title}</h4>
+                      <p className="text-slate-600 dark:text-slate-300">{item.description}</p>
                     </div>
                   </div>
                 ))}
@@ -380,29 +390,29 @@ export function LandingPage() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="glass rounded-3xl p-8 shadow-2xl">
+              <div className="glass dark:glass-dark rounded-3xl p-8 shadow-2xl">
                 <div className="text-center mb-6">
                   <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Shield className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-800">Bank-Level Security</h3>
+                  <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200">Privacy by Design</h3>
                 </div>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
-                    <span className="text-green-800 font-medium">SSL Encryption</span>
-                    <Check className="w-5 h-5 text-green-600" />
+                  <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                    <span className="text-green-800 dark:text-green-300 font-medium">Encrypted Conversations</span>
+                    <Check className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
-                    <span className="text-green-800 font-medium">Data Anonymization</span>
-                    <Check className="w-5 h-5 text-green-600" />
+                  <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                    <span className="text-green-800 dark:text-green-300 font-medium">Data Minimization</span>
+                    <Check className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
-                    <span className="text-green-800 font-medium">Regular Security Audits</span>
-                    <Check className="w-5 h-5 text-green-600" />
+                  <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                    <span className="text-green-800 dark:text-green-300 font-medium">User Control</span>
+                    <Check className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
-                    <span className="text-green-800 font-medium">Zero-Knowledge Architecture</span>
-                    <Check className="w-5 h-5 text-green-600" />
+                  <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                    <span className="text-green-800 dark:text-green-300 font-medium">Transparent Practices</span>
+                    <Check className="w-5 h-5 text-green-600 dark:text-green-400" />
                   </div>
                 </div>
               </div>
@@ -412,7 +422,7 @@ export function LandingPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 bg-white/30">
+      <section id="testimonials" className="py-20 bg-white/30 dark:bg-slate-800/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -420,10 +430,10 @@ export function LandingPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl lg:text-5xl font-bold text-slate-800 mb-6">
+            <h2 className="text-3xl lg:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">
               Loved by Thousands
             </h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-slate-600 dark:text-slate-300">
               See what our users say about their AI companions
             </p>
           </motion.div>
@@ -443,8 +453,8 @@ export function LandingPage() {
                     {testimonial.avatar}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-800">{testimonial.name}</h4>
-                    <p className="text-sm text-slate-500">{testimonial.role}</p>
+                    <h4 className="font-semibold text-slate-800 dark:text-slate-200">{testimonial.name}</h4>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">{testimonial.role}</p>
                   </div>
                 </div>
                 <div className="flex space-x-1 mb-4">
@@ -452,7 +462,7 @@ export function LandingPage() {
                     <Star key={i} className="w-4 h-4 text-amber-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-slate-600 italic">"{testimonial.content}"</p>
+                <p className="text-slate-600 dark:text-slate-300 italic">"{testimonial.content}"</p>
               </motion.div>
             ))}
           </div>
@@ -468,10 +478,10 @@ export function LandingPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl lg:text-5xl font-bold text-slate-800 mb-6">
+            <h2 className="text-3xl lg:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">
               Choose Your Plan
             </h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-slate-600 dark:text-slate-300">
               Start free, upgrade when you're ready for more
             </p>
           </motion.div>
@@ -496,11 +506,11 @@ export function LandingPage() {
                 )}
 
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-slate-800 mb-2">{plan.name}</h3>
-                  <p className="text-slate-600 mb-4">{plan.description}</p>
+                  <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-200 mb-2">{plan.name}</h3>
+                  <p className="text-slate-600 dark:text-slate-300 mb-4">{plan.description}</p>
                   <div className="mb-4">
-                    <span className="text-4xl font-bold text-slate-800">${plan.price}</span>
-                    <span className="text-slate-500">/{plan.period}</span>
+                    <span className="text-4xl font-bold text-slate-800 dark:text-slate-200">${plan.price}</span>
+                    <span className="text-slate-500 dark:text-slate-400">/{plan.period}</span>
                   </div>
                 </div>
 
@@ -508,7 +518,7 @@ export function LandingPage() {
                   {plan.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center space-x-3">
                       <Check className="w-5 h-5 text-green-500" />
-                      <span className="text-slate-700">{feature}</span>
+                      <span className="text-slate-700 dark:text-slate-300">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -518,7 +528,7 @@ export function LandingPage() {
                   className={`w-full py-3 rounded-xl font-medium transition-all ${
                     plan.popular
                       ? 'bg-gradient-to-r from-purple-500 to-teal-500 text-white hover:shadow-lg'
-                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
                   }`}
                 >
                   {plan.cta}

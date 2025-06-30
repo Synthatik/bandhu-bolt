@@ -11,6 +11,8 @@
   --color-accent: #FF9500;
   --color-background: #f2f2f7;
   --color-surface: #ffffff;
+  --color-text: #1a202c;
+  --color-text-secondary: #64748b;
   
   /* Extended WWDC 2025 Color Palette */
   --color-blue: #007AFF;
@@ -34,8 +36,10 @@
   /* Dark Mode Colors */
   --color-dark-primary: #0A84FF;
   --color-dark-secondary: #30D158;
-  --color-dark-background: #000000;
-  --color-dark-surface: #1C1C1E;
+  --color-dark-background: #0f172a;
+  --color-dark-surface: #1e293b;
+  --color-dark-text: #f1f5f9;
+  --color-dark-text-secondary: #94a3b8;
   
   /* Typography */
   --font-system: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -88,9 +92,15 @@
   
   body {
     font-family: var(--font-text);
-    background: linear-gradient(135deg, var(--color-background) 0%, rgba(0, 122, 255, 0.03) 50%, rgba(52, 199, 89, 0.03) 100%);
+    background: var(--color-background);
+    color: var(--color-text);
     min-height: 100vh;
-    color: #1D1D1F;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body.dark {
+    background: var(--color-dark-background);
+    color: var(--color-dark-text);
   }
 }
 
@@ -104,7 +114,7 @@
   }
   
   .glass-dark {
-    background: rgba(28, 28, 30, 0.85);
+    background: rgba(30, 41, 59, 0.85);
     backdrop-filter: blur(var(--blur-md));
     -webkit-backdrop-filter: blur(var(--blur-md));
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -153,7 +163,7 @@
   
   /* Buttons - WWDC 2025 Style */
   .btn-primary {
-    background: linear-gradient(135deg, var(--color-blue), var(--color-indigo));
+    background: linear-gradient(135deg, var(--color-primary), var(--color-indigo));
     color: white;
     padding: var(--space-3) var(--space-6);
     border-radius: var(--radius-xl);
@@ -176,25 +186,25 @@
   }
   
   .btn-secondary {
-    background: rgba(var(--color-blue), 0.1);
-    color: var(--color-blue);
+    background: rgba(var(--color-primary), 0.1);
+    color: var(--color-primary);
     padding: var(--space-3) var(--space-6);
     border-radius: var(--radius-xl);
     font-weight: 600;
     font-family: var(--font-system);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(var(--color-blue), 0.2);
+    border: 1px solid rgba(var(--color-primary), 0.2);
   }
   
   .btn-secondary:hover {
-    background: rgba(var(--color-blue), 0.15);
+    background: rgba(var(--color-primary), 0.15);
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
   }
   
   /* Cards - WWDC 2025 Style */
   .card {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--color-surface);
     backdrop-filter: blur(var(--blur-md));
     -webkit-backdrop-filter: blur(var(--blur-md));
     border-radius: var(--radius-2xl);
@@ -202,6 +212,11 @@
     box-shadow: var(--shadow-sm);
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .dark .card {
+    background: var(--color-dark-surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   .card:hover {
@@ -212,6 +227,10 @@
   .card-elevated {
     box-shadow: var(--shadow-lg);
     background: rgba(255, 255, 255, 0.95);
+  }
+  
+  .dark .card-elevated {
+    background: rgba(30, 41, 59, 0.95);
   }
   
   /* Floating Animation - Apple Style */
@@ -433,28 +452,15 @@ input:focus, textarea:focus, select:focus, button:focus {
   }
 }
 
-/* Dark Mode Support */
+/* Dark Mode Styles */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: #000000;
-    --color-surface: #1C1C1E;
+    --color-background: #0f172a;
+    --color-surface: #1e293b;
+    --color-text: #f1f5f9;
+    --color-text-secondary: #94a3b8;
     --color-primary: #0A84FF;
     --color-secondary: #30D158;
-  }
-  
-  body {
-    background: linear-gradient(135deg, var(--color-background) 0%, rgba(10, 132, 255, 0.05) 50%, rgba(48, 209, 88, 0.05) 100%);
-    color: #F2F2F7;
-  }
-  
-  .glass {
-    background: rgba(28, 28, 30, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .card {
-    background: rgba(28, 28, 30, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
