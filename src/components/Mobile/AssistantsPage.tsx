@@ -169,7 +169,7 @@ export function AssistantsPage() {
 
               {/* Action Button */}
               <button
-                onClick={() => handle StartChat(assistant)}
+                onClick={() => handleStartChat(assistant)}
                 className="w-full bg-gradient-to-r from-wwdc-blue to-wwdc-indigo text-white py-4 rounded-2xl font-sf-pro font-semibold flex items-center justify-center space-x-3 shadow-wwdc hover:shadow-wwdc-lg transition-all transform hover:scale-105"
               >
                 <MessageCircle className="w-5 h-5" />
